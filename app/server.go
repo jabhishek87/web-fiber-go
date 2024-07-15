@@ -19,10 +19,10 @@ var serveParams = fmt.Sprintf(
 
 func main() {
 	// Define Fiber config.
-	config := config.AppConfig()
+	appConfig := config.AppConfig()
 
 	// Define a new Fiber app with config.
-	app := fiber.New(config)
+	app := fiber.New(appConfig)
 
 	// redirect / to api/v1
 	app.Get("/", func(c fiber.Ctx) error {
