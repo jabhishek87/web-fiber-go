@@ -1,6 +1,8 @@
 package main
 
 import (
+	"app/pkg/config"
+	"app/pkg/routes"
 	"fmt"
 	"log"
 	"os"
@@ -16,15 +18,19 @@ var serveParams = fmt.Sprintf(
 )
 
 func main() {
-	// Initialize a new Fiber app
-	app := fiber.New()
+	// Define Fiber config.
+	config := config.AppConfig()
 
-	// Define a route for the GET method on the root path '/'
+	// Define a new Fiber app with config.
+	app := fiber.New(config)
+
+	// redirect / to api/v1
 	app.Get("/", func(c fiber.Ctx) error {
-		// Send a string response to the client
-		fmt.Println(os.Getenv("SERVER_PORT"))
-		return c.SendString("Hello, World 👋!")
+		return c.Redirect().To("/api/v1")
 	})
+
+	routes.PublicRoutes(app)
+	routes.NotFoundRoute(app)
 
 	// Start the server on port 3000
 	log.Fatal(app.Listen(serveParams))
