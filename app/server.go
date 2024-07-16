@@ -46,7 +46,7 @@ func setUpLog(app *fiber.App) *os.File {
 
 	logFile, err := os.OpenFile(logFilename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
-		log.Fatalf("error opening file: %v", err)
+		log.Fatalf("error opening log file: %v", err)
 	}
 
 	// Create a multi-writer to write to both stdout and the log file

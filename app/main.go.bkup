@@ -1,0 +1,21 @@
+package main
+
+import (
+	"app/pkg/virt"
+	"fmt"
+	"log"
+)
+
+func main() {
+	vc := virt.New("qemu+ssh://ksurkar@yow-ksurkar-lx.corp.ad.wrs.com/system")
+	vms, err := vc.ListAllVM()
+	if err != nil {
+		log.Fatalf("ERR 112: %v", err)
+	}
+	fmt.Println(vms)
+	for _, vm := range vms {
+		vmID, _ := vm.GetID()
+		vmName, _ := vm.GetName()
+		fmt.Println(vmID, vmName)
+	}
+}

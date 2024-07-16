@@ -13,5 +13,10 @@ func PublicRoutes(a *fiber.App) {
 
 	// Routes for GET method:
 	route.Get("/", controllers.GetApiRoot)
+	route.Get("/vmlist", controllers.GetVMList)
 	route.Get("/json", controllers.GetJSON)
+
+	webRoute := a.Group("/web")
+
+	webRoute.Get("/", controllers.GetwebRoot)
 }
