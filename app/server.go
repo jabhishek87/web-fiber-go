@@ -8,6 +8,8 @@ import (
 	"log"
 	"os"
 
+	_ "app/docs"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	_ "github.com/joho/godotenv/autoload"
@@ -35,6 +37,7 @@ func main() {
 	})
 
 	routes.PublicRoutes(app)
+	routes.SwaggerRoute(app)
 	routes.NotFoundRoute(app)
 
 	// Start the server on port 3000
