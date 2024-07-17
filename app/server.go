@@ -8,8 +8,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/gofiber/fiber/v3"
-	"github.com/gofiber/fiber/v3/middleware/logger"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	_ "github.com/joho/godotenv/autoload"
 )
 
@@ -30,8 +30,8 @@ func main() {
 	defer logFile.Close()
 
 	// redirect / to api/v1
-	app.Get("/", func(c fiber.Ctx) error {
-		return c.Redirect().To("/api/v1")
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.Redirect("/api/v1")
 	})
 
 	routes.PublicRoutes(app)
